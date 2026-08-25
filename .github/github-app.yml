@@ -1,0 +1,25 @@
+instructions: |
+  This is a Spring Boot 3 Java project (Maven) called SocOps — a Social Bingo game.
+  The app uses Thymeleaf templates, custom CSS utilities (app.css), and a WebSocket-based game engine.
+  Use Maven wrapper (./mvnw) for all build and run commands.
+  Java version: check pom.xml for the configured java.version property.
+  The main application lives under the socops/ subdirectory.
+
+scripts:
+  - name: Install / Build
+    command: Set-Location socops; .\mvnw.cmd clean package -DskipTests
+    triggers:
+      - session.create
+
+  - name: Run Dev Server
+    command: Set-Location socops; .\mvnw.cmd spring-boot:run
+
+  - name: Run Tests
+    command: Set-Location socops; .\mvnw.cmd test
+
+server_ready_pattern: 'Started \w+ in .+ on port (\d+)'
+auto_open_in_browser: true
+
+automation:
+  auto_issue_session: true
+  remote_control: false
